@@ -1,0 +1,16 @@
+.PaletteFooter {
+    height: 5vh;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    /* background-color: white !important; */
+    font-weight: "bold";
+    font-size: 12pt;
+    background-color: #eceff1;
+}
+
+.PaletteFooter-emoji {
+    font-size: 16pt;
+    margin-left: 10px;
+    margin-right: 20px;
+}
