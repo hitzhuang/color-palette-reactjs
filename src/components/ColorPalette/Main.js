@@ -12,7 +12,7 @@ import { withStyles } from "@material-ui/styles";
 const Main = ({ classes }) => {
     return (
         <Container className={classes.root} maxWidth={false}>
-            <Container maxWidth="md">
+            <Container className={classes.content} maxWidth="md">
                 <header className={classes.nav}>
                     <div className={classes.logo}>Color Palette</div>
                     <Link to="/palette/new" className={classes.link}>

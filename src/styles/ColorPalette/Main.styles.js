@@ -2,9 +2,12 @@ const styles = {
     root: {
         display: "flex",
         justifyContent: "center",
-        paddingTop: "100px",
-        paddingBottom: "100px",
-        backgroundColor: "rgb(68, 83, 219)",
+        padding: "20px 0px",
+    },
+    content: {
+        backgroundColor: "rgba(255, 255, 255,0.3)",
+        padding: "0px 20px 40px 20px",
+        borderRadius: "15px",
     },
     nav: {
         color: "white",

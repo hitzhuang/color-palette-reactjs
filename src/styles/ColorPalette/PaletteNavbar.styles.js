@@ -4,6 +4,7 @@ const styles = (theme) => ({
         alignItems: "center",
         justifyContent: "flex-start",
         height: "5vh",
+        backgroundColor: "white",
     },
     logo: {
         padding: "0px 20px",

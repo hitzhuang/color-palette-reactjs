@@ -5,6 +5,8 @@
 
 .Palette-colors {
     height: 90%;
+    border-left: 5px solid white;
+    border-right: 5px solid white;
 }
 
 .SingleColorPalette .ColorBox {

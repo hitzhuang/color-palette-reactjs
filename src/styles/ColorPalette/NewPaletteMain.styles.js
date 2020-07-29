@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     appBar: {
+        backgroundColor: "white",
         fontSize: "20px",
         transition: theme.transitions.create(["margin", "width"], {
             easing: theme.transitions.easing.sharp,
