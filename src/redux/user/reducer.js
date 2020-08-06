@@ -9,7 +9,7 @@ const userReducer = (state = INIT_STATE, actions) => {
     switch (actions.type) {
         case types.SET_USER:
             return {
-                isAuthenticated: Object.keys(actions.user).length,
+                isAuthenticated: !!Object.keys(actions.user).length,
                 user: actions.user,
             };
         default:

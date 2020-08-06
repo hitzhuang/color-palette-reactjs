@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import DeleteIcon from "@material-ui/icons/Delete";
-import ConfirmDialog from "./ConfirmDialog";
+import ConfirmDialog from "./Dialog/ConfirmDialog";
 import { removePalette } from "../redux/palettes/actions";
 import "../styles/MiniPalette.css";
 
@@ -40,7 +40,7 @@ class MiniPalette extends Component {
                         </span>
                     </div>
                 </Link>
-                {isAuthenticated === true && (
+                {isAuthenticated && (
                     <DeleteIcon
                         className="MiniPalette-delete"
                         fontSize="large"

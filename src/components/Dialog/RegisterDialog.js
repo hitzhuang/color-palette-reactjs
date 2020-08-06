@@ -9,15 +9,19 @@ import {
 } from "@material-ui/core";
 
 import grey from "@material-ui/core/colors/grey";
-import Email from "./FormField/Email";
-import Password from "./FormField/Password";
+import Username from "../FormField/Username";
+import Email from "../FormField/Email";
+import Password from "../FormField/Password";
+import ConfirmPassword from "../FormField/ConfirmPassword";
 
-import { login } from "../redux/user/actions";
+import { register } from "../../redux/user/actions";
 
-class LoginDialog extends Component {
+class RegisterDialog extends Component {
     state = {
+        username: "",
         email: "",
         password: "",
+        confirmPassword: "",
         errors: {},
     };
     handleChange = (e) => {
@@ -27,9 +31,10 @@ class LoginDialog extends Component {
     };
     handleSubmit = (e) => {
         e.preventDefault();
+        const { username, email, password, confirmPassword } = this.state;
         this.setState({ errors: {} }, () => {
             this.props
-                .login(this.state.email, this.state.password)
+                .register(username, email, password, confirmPassword)
                 .then(() => {
                     this.props.closeDialog();
                 })
@@ -44,7 +49,13 @@ class LoginDialog extends Component {
     };
     render() {
         const { open, closeDialog } = this.props;
-        const { errors, email, password } = this.state;
+        const {
+            errors,
+            username,
+            email,
+            password,
+            confirmPassword,
+        } = this.state;
         return (
             <Dialog aria-labelledby="login-dialog-title" open={open}>
                 <form onSubmit={this.handleSubmit}>
@@ -58,11 +69,27 @@ class LoginDialog extends Component {
                             value={email}
                             errorMsg={errors.email}
                         />
+                        <Username
+                            color={grey[500]}
+                            handleChange={this.handleChange}
+                            value={username}
+                            errorMsg={errors.username}
+                        />
                         <Password
+                            name="password"
+                            label="Password"
                             color={grey[500]}
                             handleChange={this.handleChange}
                             value={password}
                             errorMsg={errors.password}
+                        />
+                        <ConfirmPassword
+                            name="confirmPassword"
+                            password="Confirm Password"
+                            color={grey[500]}
+                            handleChange={this.handleChange}
+                            value={confirmPassword}
+                            errorMsg={errors.confirmPassword}
                         />
                     </DialogContent>
                     <DialogActions style={{ margin: "10px 20px 20px 20px" }}>
@@ -74,7 +101,7 @@ class LoginDialog extends Component {
                             variant="contained"
                             color="primary"
                         >
-                            Login
+                            Register
                         </Button>
                     </DialogActions>
                 </form>
@@ -83,4 +110,4 @@ class LoginDialog extends Component {
     }
 }
 
-export default connect(null, { login })(LoginDialog);
+export default connect(null, { register })(RegisterDialog);

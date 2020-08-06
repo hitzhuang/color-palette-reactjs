@@ -6,11 +6,14 @@ import styles from "../styles/Main.styles";
 import PaletteList from "../components/PaletteList";
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
-import LoginDialog from "../components/LoginDialog";
-import ConfirmDialog from "../components/ConfirmDialog";
+import LoginDialog from "../components/Dialog/LoginDialog";
+import ConfirmDialog from "../components/Dialog/ConfirmDialog";
 import { logout } from "../redux/user/actions";
+import RegisterDialog from "../components/Dialog/RegisterDialog";
 
 const Main = ({ classes, isAuthenticated, logout }) => {
+    const [goRegister, setGoRegister] = useState(false);
+    const closeRegisterDialog = () => setGoRegister(false);
     const [goLogin, setGoLogin] = useState(false);
     const closeLoginDialog = () => setGoLogin(false);
     const [goLogout, setGoLogout] = useState(false);
@@ -44,6 +47,7 @@ const Main = ({ classes, isAuthenticated, logout }) => {
                 variant="contained"
                 color="secondary"
                 style={{ marginRight: "5px" }}
+                onClick={() => setGoRegister(true)}
             >
                 register
             </Button>
@@ -74,6 +78,10 @@ const Main = ({ classes, isAuthenticated, logout }) => {
                 handleConfirm={handleLogout}
             />
             <LoginDialog open={goLogin} closeDialog={closeLoginDialog} />
+            <RegisterDialog
+                open={goRegister}
+                closeDialog={closeRegisterDialog}
+            />
         </Container>
     );
 };
