@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-
 import { withStyles } from "@material-ui/core/styles";
-import style from "../../styles/ColorPalette/ColorBox.styles";
+import style from "../styles/ColorBox.styles";
 
 class ColorBoxBack extends Component {
     handleClick = () => {

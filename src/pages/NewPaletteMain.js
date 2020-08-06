@@ -5,18 +5,18 @@ import arrayMove from "array-move";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
-import NewPaletteAppBar from "./NewPaletteAppBar";
-import NewPaletteDrawer from "./NewPaletteDrawer";
-import NewPaletteSaveDialog from "./NewPaletteSaveDialog";
+import NewPaletteAppBar from "../components/NewPaletteAppBar";
+import NewPaletteDrawer from "../components/NewPaletteDrawer";
+import NewPaletteSaveDialog from "../components/NewPaletteSaveDialog";
 
 import {
     setPaletteName,
     setPaletteEmoji,
     sortPaletteColors,
-} from "../../redux/newPalette/actions";
-import { addPalette } from "../../redux/palettes/actions";
-import useStyles from "../../styles/ColorPalette/NewPaletteMain.styles";
-import SortableColorBoxList from "./SortableColorBoxList";
+} from "../redux/newPalette/actions";
+import { addPalette } from "../redux/palettes/actions";
+import useStyles from "../styles/NewPaletteMain.styles";
+import SortableColorBoxList from "../components/SortableColorBoxList";
 
 const Alert = (props) => <MuiAlert elevation={6} variant="filled" {...props} />;
 

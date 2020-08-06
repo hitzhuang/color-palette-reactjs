@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-
 import { withStyles } from "@material-ui/core/styles";
-import style from "../../styles/ColorPalette/ColorBox.styles";
+import style from "../styles/ColorBox.styles";
 
 class ColorBox extends Component {
     state = {

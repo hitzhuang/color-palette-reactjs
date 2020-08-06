@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import "../../styles/ColorPalette/PaletteFooter.css";
+import "../styles/PaletteFooter.css";
 
 class PaletteFooter extends Component {
     render() {

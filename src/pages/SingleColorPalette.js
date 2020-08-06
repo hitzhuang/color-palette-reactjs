@@ -2,13 +2,12 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
-import "../../styles/ColorPalette/Palette.css";
-import ColorBoxMain from "./ColorBoxMain";
-import PaletteNavbar from "./PaletteNavbar";
-import PaletteFooter from "./PaletteFooter";
-
-import { generatePalette } from "../../utils/ColorPalette/colorHelper";
 import { Container, Grid } from "@material-ui/core";
+import ColorBoxMain from "../components/ColorBoxMain";
+import PaletteNavbar from "../components/PaletteNavbar";
+import PaletteFooter from "../components/PaletteFooter";
+import "../styles/Palette.css";
+import { generatePalette } from "../utils/colorHelper";
 
 class SingleColorPalette extends React.Component {
     constructor(props) {

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { SketchPicker } from "react-color";
 
+import { useTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
@@ -13,10 +14,8 @@ import NewPaletteAddColorForm from "./NewPaletteAddColorForm";
 import {
     getAllColorsFromPalettes,
     getRandomColor,
-} from "../../utils/ColorPalette/paletteHelper";
-
-import { clearPalette, addPaletteColor } from "../../redux/newPalette/actions";
-import { useTheme } from "@material-ui/core/styles";
+} from "../utils/paletteHelper";
+import { clearPalette, addPaletteColor } from "../redux/newPalette/actions";
 
 const NewPaletteDrawer = (props) => {
     const theme = useTheme();

@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
-import ColorBoxMain from "./ColorBoxMain";
-import PaletteNavbar from "./PaletteNavbar";
-import PaletteFooter from "./PaletteFooter";
+import ColorBoxMain from "../components/ColorBoxMain";
+import PaletteNavbar from "../components/PaletteNavbar";
+import PaletteFooter from "../components/PaletteFooter";
 
-import { generatePalette } from "../../utils/ColorPalette/colorHelper";
-import "../../styles/ColorPalette/Palette.css";
+import { generatePalette } from "../utils/colorHelper";
+import "../styles/Palette.css";
 import { Container, Grid } from "@material-ui/core";
 
 class Palette extends Component {

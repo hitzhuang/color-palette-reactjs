@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import chroma from "chroma-js";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { withStyles } from "@material-ui/core/styles";
-import { removePaletteColor } from "../../redux/newPalette/actions";
+import { removePaletteColor } from "../redux/newPalette/actions";
 import { SortableElement } from "react-sortable-hoc";
 
 const styles = (theme) => ({

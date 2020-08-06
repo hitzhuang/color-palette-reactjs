@@ -3,7 +3,7 @@ import data from "../../data/ColorPalette.data";
 import {
     getPalettesFromLocalStorage,
     savePalettesToLocalStorage,
-} from "../../utils/ColorPalette/paletteHelper";
+} from "../../utils/paletteHelper";
 
 let palettes = getPalettesFromLocalStorage();
 const INIT_STATE = {

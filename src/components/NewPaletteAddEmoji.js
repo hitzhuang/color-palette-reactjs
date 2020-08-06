@@ -2,14 +2,12 @@ import React from "react";
 import { connect } from "react-redux";
 
 import "emoji-mart/css/emoji-mart.css";
-import { Picker } from "emoji-mart";
-
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
-
-import { setPaletteEmoji } from "../../redux/newPalette/actions";
+import { Picker } from "emoji-mart";
+import { setPaletteEmoji } from "../redux/newPalette/actions";
 
 const NewPaletteAddEmoji = (props) => {
     const { emoji, setPaletteEmoji, handleSubmit, handleCancel } = props;

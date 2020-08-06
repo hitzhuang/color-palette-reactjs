@@ -1,10 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import Button from "@material-ui/core/Button";
 import chroma from "chroma-js";
 import { withStyles } from "@material-ui/core/styles";
-import { addPaletteColor } from "../../redux/newPalette/actions";
+import Button from "@material-ui/core/Button";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
+import { addPaletteColor } from "../redux/newPalette/actions";
 
 const styles = {
     root: {

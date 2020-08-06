@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
-import style from "../../styles/ColorPalette/PaletteNavbar.styles";
+import style from "../styles/PaletteNavbar.styles";
 
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
