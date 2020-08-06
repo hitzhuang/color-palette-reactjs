@@ -12,7 +12,6 @@ class MiniPalette extends Component {
     };
     handleDelete = (e) => {
         e.stopPropagation();
-        // this.props.removePalette(this.props.id);
         this.setState({ confirm: true });
     };
     closeDiglog = () => this.setState({ confirm: false });
@@ -35,7 +34,7 @@ class MiniPalette extends Component {
                         ))}
                     </div>
                     <div className="MiniPalette-footer">
-                        {this.props.paletteName}
+                        {this.props.name}
                         <span className="MiniPalette-emoji">
                             {this.props.emoji}
                         </span>
@@ -49,6 +48,7 @@ class MiniPalette extends Component {
                     />
                 )}
                 <ConfirmDialog
+                    title="Delete This Palette?"
                     open={this.state.confirm}
                     handleCancel={this.closeDiglog}
                     handleConfirm={this.deletePalette}

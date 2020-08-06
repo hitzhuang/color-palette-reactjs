@@ -24,6 +24,10 @@ const paletteListReducer = (state = INIT_STATE, actions) => {
             return {
                 list: [...actions.palettes],
             };
+        case types.RESET_PALETTES:
+            return {
+                list: data,
+            };
         default:
             return state;
     }

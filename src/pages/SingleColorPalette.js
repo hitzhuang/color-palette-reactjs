@@ -26,7 +26,7 @@ class SingleColorPalette extends React.Component {
             }
             this._props = {
                 shades,
-                paletteName: palette.paletteName,
+                name: palette.name,
                 emoji: palette.emoji,
             };
         }
@@ -71,7 +71,7 @@ class SingleColorPalette extends React.Component {
                     </Grid>
                 </Grid>
                 <PaletteFooter
-                    name={this._props.paletteName}
+                    name={this._props.name}
                     emoji={this._props.emoji}
                 />
             </Container>

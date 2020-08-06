@@ -7,20 +7,16 @@ import {
     ListItemAvatar,
     Avatar,
     ListItemText,
-    Divider,
 } from "@material-ui/core";
 import CheckIcon from "@material-ui/icons/Check";
 import CloseIcon from "@material-ui/icons/Close";
 import blue from "@material-ui/core/colors/blue";
 import red from "@material-ui/core/colors/red";
 
-const ConfirmDialog = ({ open, handleCancel, handleConfirm }) => {
+const ConfirmDialog = ({ open, title, handleCancel, handleConfirm }) => {
     return (
-        <Dialog aria-labelledby="delete-dialog-title" open={open}>
-            <DialogTitle id="delete-dialog-title">
-                Delete This Palette?
-            </DialogTitle>
-            <Divider />
+        <Dialog aria-labelledby="confirm-dialog-title" open={open}>
+            <DialogTitle id="confirm-dialog-title">{title}</DialogTitle>
             <List>
                 <ListItem button onClick={handleConfirm}>
                     <ListItemAvatar>
@@ -33,7 +29,7 @@ const ConfirmDialog = ({ open, handleCancel, handleConfirm }) => {
                             <CheckIcon />
                         </Avatar>
                     </ListItemAvatar>
-                    <ListItemText primary="Delete" />
+                    <ListItemText primary="ok" />
                 </ListItem>
                 <ListItem button onClick={handleCancel}>
                     <ListItemAvatar>
@@ -49,6 +45,7 @@ const ConfirmDialog = ({ open, handleCancel, handleConfirm }) => {
                     <ListItemText primary="Cancel" />
                 </ListItem>
             </List>
+            <br />
         </Dialog>
     );
 };

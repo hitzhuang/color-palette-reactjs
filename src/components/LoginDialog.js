@@ -8,20 +8,11 @@ import {
     Button,
 } from "@material-ui/core";
 
-import { withStyles } from "@material-ui/styles";
 import grey from "@material-ui/core/colors/grey";
 import Email from "./FormField/Email";
 import Password from "./FormField/Password";
 
 import { login } from "../redux/user/actions";
-
-const styles = {
-    title: {
-        backgroundColor: "#3f51b5",
-        marginBottom: "15px",
-        color: "white",
-    },
-};
 
 class LoginDialog extends Component {
     state = {
@@ -40,25 +31,24 @@ class LoginDialog extends Component {
             this.props
                 .login(this.state.email, this.state.password)
                 .then(() => {
-                    this.props.handleDialogClose();
+                    this.props.closeDialog();
                 })
                 .catch((e) => {
-                    if (e.error.errors) {
+                    if (e.error && e.error.errors) {
                         this.setState({ errors: e.error.errors });
+                    } else {
+                        console.log(e);
                     }
                 });
         });
     };
     render() {
-        const { classes, open, handleDialogClose } = this.props;
+        const { open, closeDialog } = this.props;
         const { errors, email, password } = this.state;
         return (
             <Dialog aria-labelledby="login-dialog-title" open={open}>
                 <form onSubmit={this.handleSubmit}>
-                    <DialogTitle
-                        id="login-dialog-title"
-                        className={classes.title}
-                    >
+                    <DialogTitle id="login-dialog-title">
                         Login to create palettes
                     </DialogTitle>
                     <DialogContent>
@@ -76,7 +66,7 @@ class LoginDialog extends Component {
                         />
                     </DialogContent>
                     <DialogActions style={{ margin: "10px 20px 20px 20px" }}>
-                        <Button onClick={handleDialogClose} color="primary">
+                        <Button onClick={closeDialog} color="primary">
                             Cancel
                         </Button>
                         <Button
@@ -93,4 +83,4 @@ class LoginDialog extends Component {
     }
 }
 
-export default withStyles(styles)(connect(null, { login })(LoginDialog));
+export default connect(null, { login })(LoginDialog);

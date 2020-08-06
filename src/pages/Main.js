@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/styles";
 import styles from "../styles/Main.styles";
@@ -6,10 +7,18 @@ import PaletteList from "../components/PaletteList";
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import LoginDialog from "../components/LoginDialog";
+import ConfirmDialog from "../components/ConfirmDialog";
+import { logout } from "../redux/user/actions";
 
-const Main = ({ classes, isAuthenticated }) => {
+const Main = ({ classes, isAuthenticated, logout }) => {
     const [goLogin, setGoLogin] = useState(false);
     const closeLoginDialog = () => setGoLogin(false);
+    const [goLogout, setGoLogout] = useState(false);
+    const closeLogoutDialog = () => setGoLogout(false);
+    const handleLogout = () => {
+        logout();
+        closeLogoutDialog();
+    };
 
     const renderCreatePaletteButton = () => (
         <div className={classes.link}>
@@ -18,6 +27,7 @@ const Main = ({ classes, isAuthenticated }) => {
                 color="secondary"
                 style={{ marginRight: "5px" }}
                 className={classes.yellowBtn}
+                onClick={() => setGoLogout(true)}
             >
                 Logout
             </Button>
@@ -57,9 +67,15 @@ const Main = ({ classes, isAuthenticated }) => {
                 </header>
                 <PaletteList />
             </Container>
-            <LoginDialog open={goLogin} handleDialogClose={closeLoginDialog} />
+            <ConfirmDialog
+                title="Are you sure to log out?"
+                open={goLogout}
+                handleCancel={closeLogoutDialog}
+                handleConfirm={handleLogout}
+            />
+            <LoginDialog open={goLogin} closeDialog={closeLoginDialog} />
         </Container>
     );
 };
 
-export default withStyles(styles)(Main);
+export default withStyles(styles)(connect(null, { logout })(Main));

@@ -28,9 +28,9 @@ const NewPaletteMain = (props) => {
     const [openDialog, setOpenDialog] = useState(false);
     const handleDialogOpen = () => setOpenDialog(true);
     const handleDialogClose = () => setOpenDialog(false);
-    const [openAlert, setOpenAlert] = useState(false);
-    const handleAlertOpen = () => setOpenAlert(true);
-    const handleAlertClose = () => setOpenAlert(false);
+    // const [openAlert, setOpenAlert] = useState(false);
+    // const handleAlertOpen = () => setOpenAlert(true);
+    // const handleAlertClose = () => setOpenAlert(false);
 
     const {
         name,
@@ -54,11 +54,14 @@ const NewPaletteMain = (props) => {
         reset();
         addPalette({
             paletteName: name,
-            id: name.replace(/\s+/g, "-"),
             emoji,
             colors,
-        });
-        handleAlertOpen();
+        })
+            .then(() => {
+                // redirect to main
+            })
+            .catch((error) => console.log(error));
+        // handleAlertOpen();
     };
 
     const onSortEnd = ({ oldIndex, newIndex }) => {
@@ -100,7 +103,7 @@ const NewPaletteMain = (props) => {
                 handleCancel={reset}
                 handleSubmit={handleSubmit}
             />
-            <Snackbar
+            {/* <Snackbar
                 open={openAlert}
                 autoHideDuration={3000}
                 onClose={handleAlertClose}
@@ -108,7 +111,7 @@ const NewPaletteMain = (props) => {
                 <Alert onClose={handleAlertClose} severity="success">
                     Your new palette is saved!
                 </Alert>
-            </Snackbar>
+            </Snackbar> */}
         </div>
     );
 };

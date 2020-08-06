@@ -66,7 +66,7 @@ class Palette extends Component {
                     {this.renderColorBoxes()}
                 </Grid>
                 <PaletteFooter
-                    name={this._props.paletteName}
+                    name={this._props.name}
                     emoji={this._props.emoji}
                 />
             </Container>
