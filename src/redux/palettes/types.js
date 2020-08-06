@@ -1,4 +1,5 @@
 export default {
     ADD_PALETTE: "ADD_PALETTE",
     REMOVE_PALETTE: "REMOVE_PALETTE",
+    SET_PALETTES: "SET_PALETTES",
 };

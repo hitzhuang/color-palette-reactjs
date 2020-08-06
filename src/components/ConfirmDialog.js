@@ -16,8 +16,8 @@ import red from "@material-ui/core/colors/red";
 
 const ConfirmDialog = ({ open, handleCancel, handleConfirm }) => {
     return (
-        <Dialog aria-labelledby="simple-dialog-title" open={open}>
-            <DialogTitle id="simple-dialog-title">
+        <Dialog aria-labelledby="delete-dialog-title" open={open}>
+            <DialogTitle id="delete-dialog-title">
                 Delete This Palette?
             </DialogTitle>
             <Divider />

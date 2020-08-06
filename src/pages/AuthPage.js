@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 
 class AuthPage extends Component {
-    componentWillMount() {
-        this.props.history.push("/");
+    constructor(props) {
+        super(props);
+        if (!this.props.isAuthenticated) {
+            this.props.history.push("/");
+        }
     }
     render() {
         if (this.props.isAuthenticated) {

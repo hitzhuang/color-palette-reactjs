@@ -1,30 +1,28 @@
 import types from "./types";
 import data from "../../data/ColorPalette.data";
-import {
-    getPalettesFromLocalStorage,
-    savePalettesToLocalStorage,
-} from "../../utils/paletteHelper";
+// import {
+//     getPalettesFromLocalStorage,
+//     savePalettesToLocalStorage,
+// } from "../../utils/paletteHelper";
+// let palettes = getPalettesFromLocalStorage();
 
-let palettes = getPalettesFromLocalStorage();
 const INIT_STATE = {
-    list: palettes ? palettes : data,
+    list: data,
 };
 
 const paletteListReducer = (state = INIT_STATE, actions) => {
     switch (actions.type) {
         case types.ADD_PALETTE:
-            palettes = [...state.list, actions.payload];
-            savePalettesToLocalStorage(palettes);
             return {
-                ...state,
-                list: palettes,
+                list: [...state.list, actions.palette],
             };
         case types.REMOVE_PALETTE:
-            palettes = [...state.list.filter((p) => p.id !== actions.payload)];
-            savePalettesToLocalStorage(palettes);
             return {
-                ...state,
-                list: palettes,
+                list: [...state.list.filter((p) => p.id !== actions.id)],
+            };
+        case types.SET_PALETTES:
+            return {
+                list: [...actions.palettes],
             };
         default:
             return state;

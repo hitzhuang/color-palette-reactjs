@@ -7,6 +7,14 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import * as serviceWorker from "./serviceWorker";
 
+import { initUser } from "./utils/userHelper";
+import { setCurrentUser } from "./redux/user/actions";
+
+let user = initUser();
+if (user) {
+    store.dispatch(setCurrentUser(user));
+}
+
 ReactDOM.render(
     <Provider store={store}>
         <Router>

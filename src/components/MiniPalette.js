@@ -21,7 +21,7 @@ class MiniPalette extends Component {
         this.props.removePalette(this.props.id);
     };
     render() {
-        const { id, colors } = this.props;
+        const { id, colors, isAuthenticated } = this.props;
         return (
             <div className="MiniPalette">
                 <Link to={`/palette/${id}`}>
@@ -41,11 +41,13 @@ class MiniPalette extends Component {
                         </span>
                     </div>
                 </Link>
-                <DeleteIcon
-                    className="MiniPalette-delete"
-                    fontSize="large"
-                    onClick={this.handleDelete}
-                />
+                {isAuthenticated === true && (
+                    <DeleteIcon
+                        className="MiniPalette-delete"
+                        fontSize="large"
+                        onClick={this.handleDelete}
+                    />
+                )}
                 <ConfirmDialog
                     open={this.state.confirm}
                     handleCancel={this.closeDiglog}
@@ -56,4 +58,8 @@ class MiniPalette extends Component {
     }
 }
 
-export default connect(null, { removePalette })(MiniPalette);
+const mapStateToProps = (state) => ({
+    isAuthenticated: state.user.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { removePalette })(MiniPalette);

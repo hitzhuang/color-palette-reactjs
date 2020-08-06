@@ -1,3 +1,5 @@
+import yellow from "@material-ui/core/colors/yellow";
+
 const styles = {
     root: {
         display: "flex",
@@ -22,6 +24,13 @@ const styles = {
     },
     link: {
         marginLeft: "auto",
+    },
+    yellowBtn: {
+        backgroundColor: yellow[800],
+        color: "white",
+        "&:hover": {
+            backgroundColor: yellow[900],
+        },
     },
 };
 

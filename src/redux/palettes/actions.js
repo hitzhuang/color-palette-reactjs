@@ -1,11 +1,23 @@
 import types from "./types";
 
-export const addPalette = (palette) => ({
+const add = (palette) => ({
     type: types.ADD_PALETTE,
-    payload: palette,
+    palette,
 });
 
-export const removePalette = (id) => ({
+const remove = (id) => ({
     type: types.REMOVE_PALETTE,
-    payload: id,
+    id,
 });
+
+export const setUserPalettes = (palettes) => ({
+    type: types.SET_PALETTES,
+    palettes,
+});
+
+export const addPalette = (palette) => (dispatch) => {
+    dispatch(add(palette));
+};
+export const removePalette = (id) => (dispatch) => {
+    dispatch(remove(id));
+};

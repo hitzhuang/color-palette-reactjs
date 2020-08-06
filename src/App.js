@@ -8,6 +8,8 @@ import Palette from "./pages/Palette";
 import SingleColorPalette from "./pages/SingleColorPalette";
 import NewPaletteMain from "./pages/NewPaletteMain";
 import AuthPage from "./pages/AuthPage";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
 
 const App = (props) => {
     const { location, history, isAuthenticated } = props;
@@ -45,6 +47,16 @@ const App = (props) => {
                         exact
                         path="/palette/:id/:colorId"
                         render={(props) => <SingleColorPalette {...props} />}
+                    />
+                    <Route
+                        exact
+                        path="/login"
+                        render={(props) => <LoginPage {...props} />}
+                    />
+                    <Route
+                        exact
+                        path="/register"
+                        render={(props) => <RegisterPage {...props} />}
                     />
                     <Route
                         exact
