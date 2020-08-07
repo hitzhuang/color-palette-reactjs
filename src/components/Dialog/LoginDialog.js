@@ -19,6 +19,7 @@ class LoginDialog extends Component {
         email: "",
         password: "",
         errors: {},
+        loading: false,
     };
     handleChange = (e) => {
         this.setState({
@@ -27,24 +28,32 @@ class LoginDialog extends Component {
     };
     handleSubmit = (e) => {
         e.preventDefault();
-        this.setState({ errors: {} }, () => {
+        this.setState({ errors: {}, loading: true }, () => {
             this.props
                 .login(this.state.email, this.state.password)
-                .then(() => {
-                    this.props.closeDialog();
-                })
+                .then(() => this.handleClose())
                 .catch((e) => {
                     if (e.error && e.error.errors) {
-                        this.setState({ errors: e.error.errors });
+                        this.setState({
+                            errors: e.error.errors,
+                            loading: false,
+                        });
                     } else {
+                        this.setState({ loading: false });
                         console.log(e);
                     }
                 });
         });
     };
+    handleClose = () => {
+        this.setState({ email: "", password: "", errors: {}, loading: false });
+        this.props.closeDialog();
+    };
     render() {
-        const { open, closeDialog } = this.props;
-        const { errors, email, password } = this.state;
+        const { open } = this.props;
+        const { errors, email, password, loading } = this.state;
+        const isUnLocked = email !== "" && password !== "" && !loading;
+
         return (
             <Dialog aria-labelledby="login-dialog-title" open={open}>
                 <form onSubmit={this.handleSubmit}>
@@ -66,13 +75,14 @@ class LoginDialog extends Component {
                         />
                     </DialogContent>
                     <DialogActions style={{ margin: "10px 20px 20px 20px" }}>
-                        <Button onClick={closeDialog} color="primary">
+                        <Button onClick={this.handleClose} color="primary">
                             Cancel
                         </Button>
                         <Button
                             type="submit"
                             variant="contained"
                             color="primary"
+                            disabled={!isUnLocked}
                         >
                             Login
                         </Button>

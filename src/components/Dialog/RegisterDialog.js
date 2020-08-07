@@ -23,6 +23,7 @@ class RegisterDialog extends Component {
         password: "",
         confirmPassword: "",
         errors: {},
+        loading: false,
     };
     handleChange = (e) => {
         this.setState({
@@ -32,30 +33,50 @@ class RegisterDialog extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         const { username, email, password, confirmPassword } = this.state;
-        this.setState({ errors: {} }, () => {
+        this.setState({ errors: {}, loading: true }, () => {
             this.props
                 .register(username, email, password, confirmPassword)
-                .then(() => {
-                    this.props.closeDialog();
-                })
+                .then(() => this.handleClose())
                 .catch((e) => {
                     if (e.error && e.error.errors) {
-                        this.setState({ errors: e.error.errors });
+                        this.setState({
+                            errors: e.error.errors,
+                            loading: false,
+                        });
                     } else {
+                        // unknown error...
                         console.log(e);
                     }
                 });
         });
     };
+    handleClose = () => {
+        this.setState({
+            errors: {},
+            loading: false,
+            username: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
+        });
+        this.props.closeDialog();
+    };
     render() {
-        const { open, closeDialog } = this.props;
+        const { open } = this.props;
         const {
             errors,
             username,
             email,
             password,
             confirmPassword,
+            loading,
         } = this.state;
+        const isUnLocked =
+            username !== "" &&
+            email !== "" &&
+            password !== "" &&
+            confirmPassword !== "" &&
+            !loading;
         return (
             <Dialog aria-labelledby="login-dialog-title" open={open}>
                 <form onSubmit={this.handleSubmit}>
@@ -93,13 +114,14 @@ class RegisterDialog extends Component {
                         />
                     </DialogContent>
                     <DialogActions style={{ margin: "10px 20px 20px 20px" }}>
-                        <Button onClick={closeDialog} color="primary">
+                        <Button onClick={this.handleClose} color="primary">
                             Cancel
                         </Button>
                         <Button
                             type="submit"
                             variant="contained"
                             color="primary"
+                            disabled={!isUnLocked}
                         >
                             Register
                         </Button>
