@@ -30,7 +30,7 @@ export const register = (username, email, password, confirmPassword) => (
                 );
                 resolve();
             })
-            .catch((error) => reject(error));
+            .catch(({ data }) => reject(data));
     });
 };
 
@@ -49,7 +49,7 @@ export const login = (email, password) => (dispatch) => {
                 );
                 resolve();
             })
-            .catch((error) => reject(error));
+            .catch(({ data }) => reject(data));
     });
 };
 

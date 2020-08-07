@@ -1,5 +1,4 @@
 import axios from "axios";
-
 const API_URL = "http://localhost:3000/api";
 
 export const setAuthToken = (token) => {
@@ -17,7 +16,14 @@ export const apiCall = (method, path, data) => {
                 return resolve(res.data);
             })
             .catch((err) => {
-                if (err.response) return reject(err.response.data);
+                if (err.response) return reject(err.response);
+                else {
+                    console.log(err);
+                    return reject({
+                        status: 500,
+                        data: { message: "Unknown." },
+                    });
+                }
             });
     });
 };

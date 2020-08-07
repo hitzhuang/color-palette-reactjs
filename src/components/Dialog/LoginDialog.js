@@ -39,7 +39,7 @@ class LoginDialog extends Component {
                             loading: false,
                         });
                     } else {
-                        this.setState({ loading: false });
+                        // unknown error...
                         console.log(e);
                     }
                 });
@@ -53,7 +53,6 @@ class LoginDialog extends Component {
         const { open } = this.props;
         const { errors, email, password, loading } = this.state;
         const isUnLocked = email !== "" && password !== "" && !loading;
-
         return (
             <Dialog aria-labelledby="login-dialog-title" open={open}>
                 <form onSubmit={this.handleSubmit}>

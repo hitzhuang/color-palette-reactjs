@@ -27,7 +27,7 @@ export const addPalette = (palette) => (dispatch) => {
                 dispatch(add(res.palette));
                 resolve();
             })
-            .catch((error) => reject(error));
+            .catch(reject);
     });
 };
 
@@ -38,7 +38,7 @@ export const removePalette = (id) => (dispatch) => {
                 dispatch(remove(res.palette.id));
                 resolve();
             })
-            .catch((error) => reject(error));
+            .catch(({ data }) => reject(data));
     });
 };
 
@@ -48,6 +48,6 @@ export const reloadPalettes = () => {
             .then((res) => {
                 resolve(res);
             })
-            .catch((error) => reject(error));
+            .catch(({ data }) => reject(data));
     });
 };

@@ -16,13 +16,13 @@ import {
     getRandomColor,
 } from "../utils/paletteHelper";
 import { clearPalette, addPaletteColor } from "../redux/newPalette/actions";
+import data from "../data/ColorPalette.data";
 
 const NewPaletteDrawer = (props) => {
     const theme = useTheme();
     const [color, setColor] = useState("#417769");
     const {
         classes,
-        list,
         colors,
         open,
         handleDrawerClose,
@@ -30,7 +30,7 @@ const NewPaletteDrawer = (props) => {
         addPaletteColor,
     } = props;
 
-    let copies = getAllColorsFromPalettes(list.slice(0, list.length));
+    let copies = getAllColorsFromPalettes(data.slice(0, data.length));
 
     const addRandomColor = () => {
         if (copies.length === 0) {
@@ -48,10 +48,10 @@ const NewPaletteDrawer = (props) => {
 
         if (colors.findIndex(getNotUnique) !== -1) {
             copies = copies.filter(getUnique);
-            console.log("find duplicated");
+            // console.log("find duplicated");
             addRandomColor();
         } else {
-            console.log("unique");
+            // console.log("unique");
             addPaletteColor(rc);
         }
     };
@@ -112,7 +112,6 @@ const NewPaletteDrawer = (props) => {
 
 const mapStateToProps = (state) => ({
     colors: state.newPalette.colors,
-    list: state.palettes.list,
 });
 
 export default connect(mapStateToProps, { clearPalette, addPaletteColor })(

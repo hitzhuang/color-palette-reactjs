@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
-import { dismissAlert } from "../redux/alert/actions";
+import { dismissAlert, ALERT_DISMISS_DELAY } from "../redux/alert/actions";
 
 const Alert = (props) => <MuiAlert elevation={6} variant="filled" {...props} />;
 
@@ -11,7 +11,7 @@ const AlertMessage = ({ alert, dismissAlert }) => {
     return (
         <Snackbar
             open={alert.open}
-            autoHideDuration={3000}
+            autoHideDuration={ALERT_DISMISS_DELAY}
             onClose={handleClose}
             onEmptied={handleClose}
         >

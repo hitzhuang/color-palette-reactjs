@@ -1,8 +1,8 @@
 import React from "react";
 
 import Dialog from "@material-ui/core/Dialog";
-import NewPaletteAddNameForm from "./NewPaletteAddNameForm";
-import NewPaletteAddEmoji from "./NewPaletteAddEmoji";
+import NewPaletteAddNameForm from "../NewPaletteAddNameForm";
+import NewPaletteAddEmoji from "../NewPaletteAddEmoji";
 
 const NewPaletteSaveDialog = (props) => {
     const { open, next, handleDialogClose, handleCancel, handleSubmit } = props;

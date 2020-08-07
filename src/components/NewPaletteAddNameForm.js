@@ -17,7 +17,7 @@ class NewPaletteAddNameForm extends React.Component {
         ValidatorForm.addValidationRule("isNameUnique", (value) => {
             if (
                 !this.props.list.find(
-                    (p) => p.paletteName.toLowerCase() === value.toLowerCase()
+                    (p) => p.name.toLowerCase() === value.toLowerCase()
                 )
             )
                 return true;

@@ -1,24 +1,26 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import clsx from "clsx";
 import arrayMove from "array-move";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
 import NewPaletteAppBar from "../components/NewPaletteAppBar";
 import NewPaletteDrawer from "../components/NewPaletteDrawer";
-import NewPaletteSaveDialog from "../components/NewPaletteSaveDialog";
-
+import NewPaletteSaveDialog from "../components/Dialog/NewPaletteSaveDialog";
+import SortableColorBoxList from "../components/SortableColorBoxList";
+import AlertMessage from "../components/AlertMessage";
+import { addPalette } from "../redux/palettes/actions";
+import useStyles from "../styles/NewPaletteMain.styles";
+import {
+    alertError,
+    alertErrorThenRefreshPage,
+    ALERT_DISMISS_DELAY,
+} from "../redux/alert/actions";
 import {
     setPaletteName,
     setPaletteEmoji,
     sortPaletteColors,
 } from "../redux/newPalette/actions";
-import { addPalette } from "../redux/palettes/actions";
-import useStyles from "../styles/NewPaletteMain.styles";
-import SortableColorBoxList from "../components/SortableColorBoxList";
-
-const Alert = (props) => <MuiAlert elevation={6} variant="filled" {...props} />;
 
 const NewPaletteMain = (props) => {
     const classes = useStyles();
@@ -28,10 +30,6 @@ const NewPaletteMain = (props) => {
     const [openDialog, setOpenDialog] = useState(false);
     const handleDialogOpen = () => setOpenDialog(true);
     const handleDialogClose = () => setOpenDialog(false);
-    // const [openAlert, setOpenAlert] = useState(false);
-    // const handleAlertOpen = () => setOpenAlert(true);
-    // const handleAlertClose = () => setOpenAlert(false);
-
     const {
         name,
         emoji,
@@ -40,6 +38,9 @@ const NewPaletteMain = (props) => {
         setPaletteEmoji,
         addPalette,
         sortPaletteColors,
+        alertError,
+        history,
+        alertErrorThenRefreshPage,
     } = props;
 
     const reset = () => {
@@ -53,15 +54,21 @@ const NewPaletteMain = (props) => {
     const handleSubmit = () => {
         reset();
         addPalette({
-            paletteName: name,
+            name,
             emoji,
             colors,
         })
-            .then(() => {
-                // redirect to main
-            })
-            .catch((error) => console.log(error));
-        // handleAlertOpen();
+            .then(() => history.push("/"))
+            .catch((e) => {
+                if (e.status === 401) {
+                    alertErrorThenRefreshPage(
+                        e.data.error.message,
+                        ALERT_DISMISS_DELAY
+                    );
+                } else {
+                    alertError(e.data.error.message);
+                }
+            });
     };
 
     const onSortEnd = ({ oldIndex, newIndex }) => {
@@ -103,15 +110,7 @@ const NewPaletteMain = (props) => {
                 handleCancel={reset}
                 handleSubmit={handleSubmit}
             />
-            {/* <Snackbar
-                open={openAlert}
-                autoHideDuration={3000}
-                onClose={handleAlertClose}
-            >
-                <Alert onClose={handleAlertClose} severity="success">
-                    Your new palette is saved!
-                </Alert>
-            </Snackbar> */}
+            <AlertMessage />
         </div>
     );
 };
@@ -122,9 +121,13 @@ const mapStateToProps = (state) => ({
     colors: state.newPalette.colors,
 });
 
-export default connect(mapStateToProps, {
-    setPaletteName,
-    setPaletteEmoji,
-    addPalette,
-    sortPaletteColors,
-})(NewPaletteMain);
+export default withRouter(
+    connect(mapStateToProps, {
+        setPaletteName,
+        setPaletteEmoji,
+        addPalette,
+        sortPaletteColors,
+        alertError,
+        alertErrorThenRefreshPage,
+    })(NewPaletteMain)
+);
