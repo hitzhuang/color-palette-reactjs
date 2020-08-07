@@ -35,7 +35,7 @@ export const removePalette = (id) => (dispatch) => {
     return new Promise((resolve, reject) => {
         return apiCall("delete", "/palettes/" + id)
             .then((res) => {
-                dispatch(remove(res.id));
+                dispatch(remove(res.palette.id));
                 resolve();
             })
             .catch((error) => reject(error));

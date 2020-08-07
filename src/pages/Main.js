@@ -10,6 +10,7 @@ import LoginDialog from "../components/Dialog/LoginDialog";
 import ConfirmDialog from "../components/Dialog/ConfirmDialog";
 import { logout } from "../redux/user/actions";
 import RegisterDialog from "../components/Dialog/RegisterDialog";
+import AlertMessage from "../components/AlertMessage";
 
 const Main = ({ classes, isAuthenticated, logout }) => {
     const [goRegister, setGoRegister] = useState(false);
@@ -82,6 +83,7 @@ const Main = ({ classes, isAuthenticated, logout }) => {
                 open={goRegister}
                 closeDialog={closeRegisterDialog}
             />
+            <AlertMessage />
         </Container>
     );
 };

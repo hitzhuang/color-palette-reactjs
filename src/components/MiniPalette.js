@@ -1,14 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ConfirmDialog from "./Dialog/ConfirmDialog";
 import { removePalette } from "../redux/palettes/actions";
+import { alertSuccess, alertError } from "../redux/alert/actions";
+import { logout } from "../redux/user/actions";
 import "../styles/MiniPalette.css";
 
 class MiniPalette extends Component {
     state = {
         confirm: false,
+        loading: false,
     };
     handleDelete = (e) => {
         e.stopPropagation();
@@ -16,8 +19,16 @@ class MiniPalette extends Component {
     };
     closeDiglog = () => this.setState({ confirm: false });
     deletePalette = () => {
+        if (this.state.loading) return;
+        this.setState({ loading: true });
         this.closeDiglog();
-        this.props.removePalette(this.props.id);
+        this.props
+            .removePalette(this.props.id)
+            .then(() => this.props.alertSuccess("Palette is deleted."))
+            .catch((e) => {
+                this.props.logout();
+                this.props.alertError(e.error.message);
+            });
     };
     render() {
         const { id, colors, isAuthenticated } = this.props;
@@ -62,4 +73,11 @@ const mapStateToProps = (state) => ({
     isAuthenticated: state.user.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { removePalette })(MiniPalette);
+export default withRouter(
+    connect(mapStateToProps, {
+        logout,
+        removePalette,
+        alertSuccess,
+        alertError,
+    })(MiniPalette)
+);

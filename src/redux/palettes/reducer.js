@@ -1,10 +1,5 @@
 import types from "./types";
 import data from "../../data/ColorPalette.data";
-// import {
-//     getPalettesFromLocalStorage,
-//     savePalettesToLocalStorage,
-// } from "../../utils/paletteHelper";
-// let palettes = getPalettesFromLocalStorage();
 
 const INIT_STATE = {
     list: data,
