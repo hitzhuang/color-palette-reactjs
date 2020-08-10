@@ -1,5 +1,5 @@
 import axios from "axios";
-const API_URL = "http://localhost:3000/api";
+const API_URL = process.env.REACT_APP_API_URI;
 
 export const setAuthToken = (token) => {
     if (token) {
