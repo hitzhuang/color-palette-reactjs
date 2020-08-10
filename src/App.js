@@ -1,15 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
-import { SwitchTransition, CSSTransition } from "react-transition-group";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 import Main from "./pages/Main";
 import Palette from "./pages/Palette";
 import SingleColorPalette from "./pages/SingleColorPalette";
 import NewPaletteMain from "./pages/NewPaletteMain";
 import AuthPage from "./pages/AuthPage";
-import LoginPage from "./pages/LoginPage";
-import RegisterPage from "./pages/RegisterPage";
 
 const App = (props) => {
     const { location, history, isAuthenticated } = props;
@@ -19,7 +17,7 @@ const App = (props) => {
             ? "slide-out"
             : "slide-in";
     return (
-        <SwitchTransition>
+        <TransitionGroup>
             <CSSTransition
                 timeout={300}
                 classNames={slideEffect}
@@ -50,16 +48,6 @@ const App = (props) => {
                     />
                     <Route
                         exact
-                        path="/login"
-                        render={(props) => <LoginPage {...props} />}
-                    />
-                    <Route
-                        exact
-                        path="/register"
-                        render={(props) => <RegisterPage {...props} />}
-                    />
-                    <Route
-                        exact
                         path="/"
                         render={() => (
                             <Main isAuthenticated={isAuthenticated} />
@@ -68,7 +56,7 @@ const App = (props) => {
                     <Redirect to="/" />
                 </Switch>
             </CSSTransition>
-        </SwitchTransition>
+        </TransitionGroup>
     );
 };
 

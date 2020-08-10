@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import DeleteIcon from "@material-ui/icons/Delete";
+import { Grid } from "@material-ui/core";
 import ConfirmDialog from "./Dialog/ConfirmDialog";
 import { removePalette } from "../redux/palettes/actions";
 import { alertSuccess, alertError } from "../redux/alert/actions";
@@ -37,11 +38,12 @@ class MiniPalette extends Component {
                 <Link to={`/palette/${id}`}>
                     <div className="MiniPalette-colors">
                         {colors.map((c, i) => (
-                            <div
-                                className="MiniPalette-color"
-                                key={`MiniPalette-${id}-${i}`}
-                                style={{ backgroundColor: c.color }}
-                            ></div>
+                            <Grid key={`MiniPalette-${id}-${i}`} item xs={3}>
+                                <div
+                                    className="MiniPalette-color"
+                                    style={{ backgroundColor: c.color }}
+                                ></div>
+                            </Grid>
                         ))}
                     </div>
                     <div className="MiniPalette-footer">
