@@ -1,6 +1,7 @@
 {
-    "name": "color-palette2",
-    "version": "0.1.0",
+    "name": "color-palette-reactjs",
+    "homepage": "https://pjx-hitz.github.io/color-palette-reactjs",
+    "version": "1.0.0",
     "private": true,
     "dependencies": {
         "@material-ui/core": "^4.11.0",
@@ -49,5 +50,8 @@
             "last 1 firefox version",
             "last 1 safari version"
         ]
+    },
+    "devDependencies": {
+        "gh-pages": "^3.1.0"
     }
 }
