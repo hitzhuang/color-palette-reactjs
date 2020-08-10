@@ -71,7 +71,7 @@ const styles = {
         width: "100%",
         height: "100%",
         transition: "transform 0.6s ease-in-out",
-        transform: "scale(0.1)",
+        transform: "scale(0)",
 
         "&.show": {
             opacity: "1",
