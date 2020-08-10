@@ -1,21 +1,23 @@
 import React from "react";
-
+import { connect } from "react-redux";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
-import Main from "./components/ColorPalette/Main";
-import Palette from "./components/ColorPalette/Palette";
-import SingleColorPalette from "./components/ColorPalette/SingleColorPalette";
-import NewPaletteMain from "./components/ColorPalette/NewPaletteMain";
-import { SwitchTransition, CSSTransition } from "react-transition-group";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
+
+import Main from "./pages/Main";
+import Palette from "./pages/Palette";
+import SingleColorPalette from "./pages/SingleColorPalette";
+import NewPaletteMain from "./pages/NewPaletteMain";
+import AuthPage from "./pages/AuthPage";
 
 const App = (props) => {
-    const { location, history } = props;
+    const { location, history, isAuthenticated } = props;
     const { params } = props.location;
     const slideEffect =
         (params && params.back) || (history && history.action === "POP")
             ? "slide-out"
             : "slide-in";
     return (
-        <SwitchTransition>
+        <TransitionGroup>
             <CSSTransition
                 timeout={300}
                 classNames={slideEffect}
@@ -25,7 +27,14 @@ const App = (props) => {
                     <Route
                         exact
                         path="/palette/new"
-                        render={(props) => <NewPaletteMain {...props} />}
+                        render={(props) => (
+                            <AuthPage
+                                isAuthenticated={isAuthenticated}
+                                history={history}
+                            >
+                                <NewPaletteMain {...props} />
+                            </AuthPage>
+                        )}
                     />
                     <Route
                         exact
@@ -37,12 +46,22 @@ const App = (props) => {
                         path="/palette/:id/:colorId"
                         render={(props) => <SingleColorPalette {...props} />}
                     />
-                    <Route exact path="/" render={() => <Main />} />
+                    <Route
+                        exact
+                        path="/"
+                        render={() => (
+                            <Main isAuthenticated={isAuthenticated} />
+                        )}
+                    />
                     <Redirect to="/" />
                 </Switch>
             </CSSTransition>
-        </SwitchTransition>
+        </TransitionGroup>
     );
 };
 
-export default withRouter(App);
+const mapStateToProps = (state) => ({
+    isAuthenticated: state.user.isAuthenticated,
+});
+
+export default withRouter(connect(mapStateToProps)(App));

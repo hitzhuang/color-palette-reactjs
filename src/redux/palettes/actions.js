@@ -1,11 +1,53 @@
 import types from "./types";
+import { apiCall } from "../../service/axios";
 
-export const addPalette = (palette) => ({
+const add = (palette) => ({
     type: types.ADD_PALETTE,
-    payload: palette,
+    palette,
 });
 
-export const removePalette = (id) => ({
+const remove = (id) => ({
     type: types.REMOVE_PALETTE,
-    payload: id,
+    id,
 });
+
+export const resetPalettes = () => ({
+    type: types.RESET_PALETTES,
+});
+
+export const setUserPalettes = (palettes) => ({
+    type: types.SET_PALETTES,
+    palettes,
+});
+
+export const addPalette = (palette) => (dispatch) => {
+    return new Promise((resolve, reject) => {
+        return apiCall("post", "/palettes", palette)
+            .then((res) => {
+                dispatch(add(res.palette));
+                resolve();
+            })
+            .catch(reject);
+    });
+};
+
+export const removePalette = (id) => (dispatch) => {
+    return new Promise((resolve, reject) => {
+        return apiCall("delete", "/palettes/" + id)
+            .then((res) => {
+                dispatch(remove(res.palette.id));
+                resolve();
+            })
+            .catch(({ data }) => reject(data));
+    });
+};
+
+export const reloadPalettes = () => {
+    return new Promise((resolve, reject) => {
+        return apiCall("get", "/palettes")
+            .then((res) => {
+                resolve(res);
+            })
+            .catch(({ data }) => reject(data));
+    });
+};
